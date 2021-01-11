@@ -15,7 +15,7 @@ limitations under the License.
 */
 package main
 
-import "github.com/KenIshida8/go-cobra/cmd"
+import "go-CLItool-test/go-cobra/cmd"
 
 func main() {
 	cmd.Execute()
