@@ -38,3 +38,10 @@ func initConfig() {
 
 	viper.ReadInConfig()
 }
+
+func newDefaultClient() (*Client, error) {
+	endpointURL := viper.GetString("url")
+	httpClient := &http.Client{}
+	userAgent := fmt.Sprintf("hoge/%s (%s)", Version, runtime.Version())
+	return newClient(endpointURL, httpClient, userAgent)
+}
