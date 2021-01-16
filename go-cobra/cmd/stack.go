@@ -76,3 +76,23 @@ func runStackShowCmd(cmd *cobra.Command, args []string) error {
 
 	return nil
 }
+
+func (client *Client) StackShow(ctx context.Context, apiRequest AppStackShowRequest) (*AppStackShowResponse, error) {
+	subPath := fmt.Sprintf("/app_stacks/%d", apiRequest.ID)
+	httpRequest, err := client.newRequest(ctx, "GET", subPath, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	httpResponse, err := client.HTTPClient.Do(httpRequest)
+	if err != nil {
+		return nil, err
+	}
+
+	var apiResponse AppStackShowResponse
+	if err := decodeBody(httpResponse, &apiResponse); err != nil {
+		return nil, err
+	}
+
+	return &apiResponse, nil
+}
